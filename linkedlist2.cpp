@@ -50,7 +50,7 @@ void Delete(int n)
         delete temp1;
         return;
     }
-    for (int i = 0; i < n-2; i++)
+    for (int i = 0; i < n - 2; i++)
     {
         temp1 = temp1->next;
     }
