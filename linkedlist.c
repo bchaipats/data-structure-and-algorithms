@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 struct Node
 {
@@ -7,12 +7,29 @@ struct Node
     struct Node *next;
 };
 
-void Insert(struct Node **head, int x)
+struct Node *Insert(struct Node *head, int data)
 {
+    // insert data at the end of the linked list.
+    // a node for new data
     struct Node *temp = malloc(sizeof(struct Node));
-    temp->data = x;
-    temp->next = *head;
-    *head = temp;
+    temp->data = data;
+    temp->next = NULL;
+
+    // empty linked list.
+    if (head == NULL)
+    {
+        head = temp;
+        return head;
+    }
+
+    // non-empty linked list.
+    struct Node *temp2 = head;
+    while (temp2->next != NULL)
+    {
+        temp2 = temp2->next;
+    }
+    temp2->next = temp;
+    return head;
 }
 
 void Print(struct Node *head)
@@ -26,18 +43,41 @@ void Print(struct Node *head)
     printf("\n");
 }
 
+void ReversePrint(struct Node *p)
+{
+    if (p == NULL)
+    {
+        return;
+    }
+    ReversePrint(p->next);
+    printf("%d ", p->data);
+}
+
+struct Node *Reverse(struct Node *head)
+{
+    struct Node *prev = NULL;
+    struct Node *curr = head;
+
+    while (curr != NULL)
+    {
+        struct Node *next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    head = prev;
+    return head;
+}
+
 int main()
 {
     struct Node *head = NULL;
-    int n, i, x;
-
-    printf("How many numbers?\n");
-    scanf("%d", &n);
-    for (i = 0; i < n; i++)
-    {
-        printf("Enter the number\n");
-        scanf("%d", &x);
-        Insert(&head, x);
-        Print(head);
-    }
+    head = Insert(head, 2);
+    head = Insert(head, 4);
+    head = Insert(head, 6);
+    head = Insert(head, 8);
+    Print(head);
+    head = Reverse(head);
+    Print(head);
+    ReversePrint(head);
 }
