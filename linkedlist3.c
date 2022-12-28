@@ -43,6 +43,16 @@ void Print(struct Node *head)
     printf("\n");
 }
 
+void ReversePrint(struct Node *p)
+{
+    if (p == NULL)
+    {
+        return;
+    }
+    ReversePrint(p->next);
+    printf("%d ", p->data);
+}
+
 struct Node *Reverse(struct Node *head)
 {
     struct Node *prev = NULL;
@@ -69,4 +79,5 @@ int main()
     Print(head);
     head = Reverse(head);
     Print(head);
+    ReversePrint(head);
 }
