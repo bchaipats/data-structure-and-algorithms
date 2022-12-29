@@ -8,11 +8,17 @@ struct BstNode
     BstNode *right;
 };
 
-BstNode *Insert(BstNode *root, int data)
+BstNode *GetNewNode(int data)
 {
     BstNode *newNode = new BstNode();
     newNode->data = data;
     newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+BstNode *Insert(BstNode *root, int data)
+{
+    BstNode *newNode = GetNewNode(data);
     if (root == NULL)
         root = newNode;
     else if (newNode->data <= root->data)
