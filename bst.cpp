@@ -40,6 +40,26 @@ bool Search(BstNode *root, int data)
         return Search(root->right, data);
 }
 
+int FindMin(BstNode *root)
+{
+    if (root == NULL)
+        return -1;
+    if (root->left == NULL)
+        return root->data;
+    else
+        return FindMin(root->left);
+}
+
+int FindMax(BstNode *root)
+{
+    if (root == NULL)
+        return -1;
+    if (root->right == NULL)
+        return root->data;
+    else
+        return FindMax(root->right);
+}
+
 int main()
 {
     BstNode *root = NULL;
@@ -49,6 +69,13 @@ int main()
     root = Insert(root, 25);
     root = Insert(root, 8);
     root = Insert(root, 12);
+    root = Insert(root, 32);
+
+    // Find min
+    printf("Minimum is: %d\n", FindMin(root));
+    
+    // Find max
+    printf("Maximum is: %d\n", FindMax(root));
 
     int number;
     cout << "Enter number to be searched\n";
