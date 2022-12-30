@@ -60,6 +60,16 @@ int FindMax(BstNode *root)
         return FindMax(root->right);
 }
 
+int FindHeight(BstNode *root)
+{
+    if (root == NULL)
+        return -1;
+    int leftHeight = FindHeight(root->left);
+    int rightHeight = FindHeight(root->right);
+    int rootHeight = max(leftHeight, rightHeight) + 1;
+    return rootHeight;
+}
+
 int main()
 {
     BstNode *root = NULL;
@@ -71,9 +81,12 @@ int main()
     root = Insert(root, 12);
     root = Insert(root, 32);
 
+    // Find height
+    printf("Tree height is: %d\n", FindHeight(root));
+
     // Find min
     printf("Minimum is: %d\n", FindMin(root));
-    
+
     // Find max
     printf("Maximum is: %d\n", FindMax(root));
 
