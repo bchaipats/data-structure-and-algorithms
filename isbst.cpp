@@ -1,5 +1,5 @@
 #define INT_MIN -999999
-#define INT_MAX  999999
+#define INT_MAX 999999
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -25,7 +25,8 @@ bool IsBstUtil(Node *root, int minValue, int maxValue)
         return false;
 }
 
-bool IsBinarySearchTree(Node *root){
+bool IsBinarySearchTree(Node *root)
+{
     return IsBstUtil(root, INT_MIN, INT_MAX);
 }
 
