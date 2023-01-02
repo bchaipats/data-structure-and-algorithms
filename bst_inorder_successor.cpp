@@ -20,7 +20,7 @@ Node *Find(Node *root, int data)
         return Find(root->right, data);
 }
 
-Node *FindMin(Node *root, int data)
+Node *FindMin(Node *root)
 {
     if (root == NULL)
         return NULL;
@@ -35,16 +35,16 @@ Node *GetSuccessor(Node *root, int data)
 {
     Node *current = Find(root, data);
     if (current == NULL)
-        return NULL;
-    if (current->right != NULL)
-        return FindMin(current->right, data);
+        return current;
+    else if (current->right != NULL)
+        return FindMin(current->right);
     else
     {
         Node *successor = NULL;
         Node *ancestor = root;
         while (ancestor != current)
         {
-            if (current->data < ancestor->data)
+            if (ancestor->data > current->data)
             {
                 successor = ancestor;
                 ancestor = ancestor->left;
@@ -109,7 +109,7 @@ int main()
     cout << "\n";
 
     // Find Inorder successor of some node.
-    struct Node *successor = GetSuccessor(root, 10);
+    struct Node *successor = GetSuccessor(root, 1);
     if (successor == NULL)
         cout << "No successor Found\n";
     else
